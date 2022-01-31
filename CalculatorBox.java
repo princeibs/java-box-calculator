@@ -10,6 +10,16 @@ public class CalculatorBox extends JFrame {
     JButton numBtn[];
     JTextField output;
     String previous, current, operator;
+    
+    public void processOutputNumber() {
+        if (current.length() > 0) {
+            String integerPart = current.split("\\.")[0];
+            String decimalPart = current.split("\\.")[1];
+            if (decimalPart.equals("0")) {
+                current = integerPart;
+            }
+        }
+    }
 
     public void delete() {
         if (current.length() > 0) {
@@ -76,6 +86,7 @@ public class CalculatorBox extends JFrame {
         current = String.valueOf(result);
         operator = null;
         previous = "";
+        processOutputNumber();
     }
 
     private class NumberBtnHandler implements ActionListener {
@@ -215,7 +226,7 @@ public class CalculatorBox extends JFrame {
         row3.add(numBtn[6]);
         row3.add(btnAdd);
         row4.add(numBtn[1]);
-        row4.add(numBtn[2]);;
+        row4.add(numBtn[2]);
         row4.add(numBtn[3]);
         row4.add(btnSubtract);
         row5.add(btnDot);
